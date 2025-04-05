@@ -1,15 +1,14 @@
 # Project Title
-Doc Inference
+Workflow
 
 ## Description
-Doc Inference is a web application designed for processing invoices and converting PDF documents into images. It leverages the Quart framework for asynchronous operations and provides a RESTful API for interacting with its functionalities.
+LLM Based Workflow Manager for Rag , Chat and Varipous Other Workflow creation. 
 
 ## Technologies Used
 - Docker
 - uv
 - Quart
 - Pydantic-ai
-
 
 ## Installation
 To set up the project locally, follow these steps:
@@ -21,21 +20,19 @@ To set up the project locally, follow these steps:
    docker-compose up
    ```
 
-## Usage
-The application runs on port 5001. You can access the API endpoints at `http://localhost:5001`.
-
-## API Endpoints
-- **POST /invoice**: Process an invoice.
-
-## Services
-- **Invoice Service**: Handles invoice processing and data extraction.
-- **PDF to Image Service**: Converts PDF files into image formats.
-
 ## Configuration
 The application uses environment variables defined in the `.env` file and configuration files located in the `src/configs` directory. Ensure to set the necessary configurations before running the application.
 
-## cli
-
+## cli 
 EXPORT QUART_APP=run_app:app
-quart initdb
+1. quart initdb
 
+
+## DB Details
+- NA
+
+## API Endpoints
+- NA
+
+## Services
+- NA
