@@ -16,7 +16,7 @@ from sqlalchemy.orm import DeclarativeBase
 
 def _app_ctx_id() -> int:
     """Get the id of the current Flask application context for the session scope."""
-    return id(app_ctx._get_current_object())  # noqa: SLF001
+    return id(app_ctx)
 
 
 class SqlAlchemy:

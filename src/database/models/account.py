@@ -25,17 +25,15 @@ class Account(db.Model):
     id: Mapped[uuid.UUID] = mapped_column(UUID(as_uuid=True), default=uuid.uuid4, nullable=False, primary_key=True)
     name: Mapped[str] = mapped_column(String(255), nullable=False)
     email: Mapped[str] = mapped_column(String(255), nullable=False)
-
     password: Mapped[str | None] = mapped_column(String(255), nullable=True)
     password_salt: Mapped[str] = mapped_column(String(255), nullable=True)
     interface_language: Mapped[str] = mapped_column(String(16))
     interface_theme: Mapped[str] = mapped_column(String(16))
     timezone: Mapped[str] = mapped_column(String(16))
-    last_login_at: Mapped[str] = mapped_column(DateTime)
+    last_login_at: Mapped[datetime] = mapped_column(DateTime, server_default=func.current_timestamp())
     last_login_ip: Mapped[str] = mapped_column(String(32))
     last_active_at: Mapped[str] = mapped_column(DateTime, nullable=False, server_default=func.current_timestamp())
     status: Mapped[str] = mapped_column(String(16), nullable=False, server_default=text("'active'"))
-    initialized_at: Mapped[datetime] = mapped_column(DateTime())
     created_at: Mapped[datetime] = mapped_column(DateTime(), nullable=False, server_default=func.current_timestamp())
     updated_at: Mapped[datetime] = mapped_column(DateTime(), nullable=False, server_default=func.current_timestamp())
 

@@ -25,7 +25,8 @@ The application uses environment variables defined in the `.env` file and config
 
 ## cli 
 EXPORT QUART_APP=run_app:app
-1. quart initdb
+1. Initilize Database `quart init-db`
+2. Create New users `quart create-user --username <username> --email <email> --password <password>`
 
 
 ## DB Details

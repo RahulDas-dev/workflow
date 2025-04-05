@@ -31,6 +31,7 @@ def register_app(app: Quart) -> None:
 
 
 def register_commands(app: Quart) -> None:
-    from src.commands import initdb
+    from commands import create_user, init_db
 
-    app.cli.add_command(initdb)
+    app.cli.add_command(init_db)
+    app.cli.add_command(create_user)
