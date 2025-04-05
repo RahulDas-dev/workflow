@@ -1,34 +1,40 @@
-FROM python:3.11
+FROM python:3.13-slim-bookworm AS base
 
-RUN apt update && apt upgrade -y
-RUN apt install -y poppler-utils
+# install poppler-utils
+RUN apt update && apt upgrade -y && \
+    apt install -y poppler-utils && \
+    apt clean && rm -rf /var/lib/apt/lists/*
 
 # Set the POPPLER_PATH environment variable dynamically
 RUN POPPLER_PATH=$(dirname $(which pdftotext)) && echo "POPPLER_PATH=$POPPLER_PATH" >> /etc/environment
 ENV POPPLER_PATH=$POPPLER_PATH
 ENV PATH=$POPPLER_PATH:$PATH
 
-# copy the application to app directory 
-COPY src /app/src
-COPY run_app.py /app/run_app.py
-COPY pyproject.toml /app/pyproject.toml
-COPY uv.lock /app/uv.lock
-COPY .env /app/.env
-COPY .config.prod /app/.config
+# install uv 
+COPY --from=ghcr.io/astral-sh/uv:0.4.24 /uv /bin/uv
+ENV UV_COMPILE_BYTECODE=1 UV_LINK_MODE=copy
 
 # app directory is the current working directory
 WORKDIR /app
+COPY uv.lock pyproject.toml /app/
 
-# create a temp direcoroty
+# install the dependencies
+ENV DOCKER_BUILDKIT=1
+RUN --mount=type=cache,target=/root/.cache/uv uv sync --frozen --no-install-project --no-dev
+
+# copy the application to app directory 
+COPY src /app/src
+COPY run_app.py /app/run_app.py
+COPY .env /app/.env
+COPY .config /app/.config
+
+# create a temp directory
 RUN mkdir -p /app/temp
 
-# install uv
-RUN pip install --no-cache-dir uv
-
-# install dependency
-RUN uv sync --frozen --no-dev
+ENV PATH="/app/.venv/bin:$PATH"
+EXPOSE 5001
 
 # run the app
-ENTRYPOINT [ "uv", "run", "hypercorn", "run_app:app", "--bind", "127.0.0.1:5001" ]
+ENTRYPOINT [ "hypercorn", "run_app:app", "--bind", "0.0.0.0:5001" ]
 
 
