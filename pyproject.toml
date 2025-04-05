@@ -1,0 +1,58 @@
+[project]
+name = "workflow"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "dotenv>=0.9.9",
+    "pydantic-settings>=2.8.1",
+    "pydantic>=2.11.1",
+    "pytest>=8.3.5",
+    "pytest-asyncio>=0.26.0",
+    "pytz>=2025.2",
+    "quart-cors>=0.8.0",
+    "quart-schema>=0.21.0",
+    "quart-uploads>=0.0.4",
+    "quart==0.20.0",
+    "sqlalchemy>=2.0.40",
+    "asyncpg>=0.30.0",
+]
+
+[tool.uv]
+dev-dependencies = [
+    "aiosqlite>=0.21.0",
+    "ruff>=0.11.2",
+]
+
+[tool.ruff]
+exclude = [
+    ".ruff_cache",
+    ".git",
+    ".ipynb_checkpoints",
+    ".venv",
+    ".vscode",
+    "notebooks"
+]
+extend-include = []
+line-length = 120
+indent-width = 4
+target-version = "py39"
+
+[tool.ruff.lint]
+ignore = ["ANN204", "ANN401", "E731", "D", "DTZ005", "BLE001","B008", "CPY001","COM812", "ERA001", "EM101","EM102", "FA","FBT", "G004", "UP", "TRY", "PTH123","ISC001" ]
+select = ["ALL"]
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+skip-magic-trailing-comma = false
+line-ending = "auto"
+docstring-code-format = false
+docstring-code-line-length = "dynamic"
+
+
+[tool.pytest.ini_options]
+markers = [
+    "asyncio: mark a test as an asyncio test."
+]
