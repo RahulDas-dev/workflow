@@ -1,3 +1,3 @@
-from .app_conf import InvoiceInferConfig
+from .app_conf import AppConfig
 
-app_config = InvoiceInferConfig()
+app_config = AppConfig()

@@ -77,7 +77,7 @@ class DatabaseConfig(BaseSettings):
 
     @property
     def driver(self) -> str:
-        if "postgresql" in self.DB_TYPE:
+        if "postgres" in self.DB_TYPE:
             return "postgresql+asyncpg"
         if "sqlite" in self.DB_TYPE:
             return "sqlite+aiosqlite"

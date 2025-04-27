@@ -21,9 +21,7 @@ class Document(db.Model):
     dataset_process_rule_id: Mapped[uuid.UUID] = mapped_column(UUID(as_uuid=True), nullable=True)
     batch: Mapped[str] = mapped_column(String(255), nullable=False)
     name: Mapped[str] = mapped_column(String(255), nullable=False)
-    created_from: Mapped[str] = mapped_column(String(255), nullable=False)
     created_by: Mapped[uuid.UUID] = mapped_column(UUID(as_uuid=True), nullable=False)
-    created_api_request_id: Mapped[uuid.UUID] = mapped_column(UUID(as_uuid=True), nullable=True)
     created_at: Mapped[datetime] = mapped_column(DateTime(), nullable=False, server_default=func.current_timestamp())
 
     # start processing

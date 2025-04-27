@@ -37,3 +37,8 @@ EXPORT QUART_APP=run_app:app
 
 ## Services
 - NA
+
+
+# Development Guide 
+
+`set QUART_APP=run_app:app` for windows

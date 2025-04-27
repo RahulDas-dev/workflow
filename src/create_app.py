@@ -28,9 +28,14 @@ def _register_services(app: LLMOrchaX) -> None:
 
 
 def _register_blueprints(app: LLMOrchaX) -> None:
+    from quart import Blueprint
+
     from blueprints import bp
 
-    app.register_blueprint(bp)
+    api_v1 = Blueprint("parent", __name__, url_prefix="/api/v1")
+    api_v1.register_blueprint(bp)
+
+    app.register_blueprint(api_v1)
     logging.info("Blueprints registration complete...")
 
 
