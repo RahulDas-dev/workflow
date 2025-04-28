@@ -10,11 +10,11 @@ dependencies = [
     "pydantic>=2.11.1",
     "pytz>=2025.2",
     "quart-cors>=0.8.0",
-    "quart-schema>=0.21.0",
     "quart-uploads>=0.0.4",
     "quart==0.20.0",
     "sqlalchemy>=2.0.40",
     "asyncpg>=0.30.0",
+    "quart-schema[pydantic]>=0.22.0",
 ]
 
 [tool.uv]

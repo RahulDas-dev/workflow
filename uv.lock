@@ -1,4 +1,5 @@
 version = 1
+revision = 1
 requires-python = ">=3.11"
 
 [[package]]
@@ -77,7 +78,7 @@ name = "click"
 version = "8.1.8"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "colorama", marker = "platform_system == 'Windows'" },
+    { name = "colorama", marker = "sys_platform == 'win32'" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/b9/2e/0090cbf739cee7d23781ad4b89a9894a41538e4fcf4c31dcdd705b78eb8b/click-8.1.8.tar.gz", hash = "sha256:ed53c9d8990d83c2a27deae68e4ee337473f6330c040a31d4225c9574d16096a", size = 226593 }
 wheels = [
@@ -503,15 +504,20 @@ wheels = [
 
 [[package]]
 name = "quart-schema"
-version = "0.21.0"
+version = "0.22.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "pyhumps" },
     { name = "quart" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/36/d6/6ba58252b660cd2ff98f0758e46ce5aa3f39976c2db61dfcfa80883c570a/quart_schema-0.21.0.tar.gz", hash = "sha256:5edcd18adb223c9d0f234688238882884fb09a4ee52fb29b50928821adbb7064", size = 23733 }
+sdist = { url = "https://files.pythonhosted.org/packages/ee/10/69cc4344e9f01a06aea92ccbc3352fefb02b53d976954bcc7f4e4e69ba36/quart_schema-0.22.0.tar.gz", hash = "sha256:6ee190427d114b572f9f3f31b6babb5d85b3b0329cdc47c5346b569f3000084c", size = 24464 }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/ae/b7/c5cfa45ec6835005f72c7d667508e91a5f00f656ece2bd83e9ecb0d8643d/quart_schema-0.21.0-py3-none-any.whl", hash = "sha256:57b8f7d2f8cc5bcbf6b2200ed17f870fc26811c5d0ac5c6a02352644ab068129", size = 21360 },
+    { url = "https://files.pythonhosted.org/packages/2a/6e/2c290b3877a1e3d20e901b8e26573b7db46704b0b173462d11e1709444ca/quart_schema-0.22.0-py3-none-any.whl", hash = "sha256:2a86e16beda0b0b6e15237baa8b8e690b90dea4b68b8b84147151cf5dd6cff78", size = 21757 },
+]
+
+[package.optional-dependencies]
+pydantic = [
+    { name = "pydantic" },
 ]
 
 [[package]]
@@ -644,7 +650,7 @@ dependencies = [
     { name = "pytz" },
     { name = "quart" },
     { name = "quart-cors" },
-    { name = "quart-schema" },
+    { name = "quart-schema", extra = ["pydantic"] },
     { name = "quart-uploads" },
     { name = "sqlalchemy" },
 ]
@@ -666,7 +672,7 @@ requires-dist = [
     { name = "pytz", specifier = ">=2025.2" },
     { name = "quart", specifier = "==0.20.0" },
     { name = "quart-cors", specifier = ">=0.8.0" },
-    { name = "quart-schema", specifier = ">=0.21.0" },
+    { name = "quart-schema", extras = ["pydantic"], specifier = ">=0.22.0" },
     { name = "quart-uploads", specifier = ">=0.0.4" },
     { name = "sqlalchemy", specifier = ">=2.0.40" },
 ]
